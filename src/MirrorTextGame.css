@@ -108,3 +108,20 @@ input.form-control {
 .popup-notification.fade-out {
     opacity: 0;
 }
+
+/* Add this to your MirrorTextGame.css */
+
+.home-button-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+  }
+  
+  .home-button-container .btn {
+    width: 100%;
+    max-width: 300px; 
+    margin: 0 auto;
+  }
+  

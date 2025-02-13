@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./MirrorTextGame.css";
-import apiService from './apiService';
+import apiService from "./apiService";
 
 const MirrorTextGame = () => {
   const [difficulty, setDifficulty] = useState(""); 
@@ -9,10 +9,9 @@ const MirrorTextGame = () => {
   const [selectedWord, setSelectedWord] = useState(null); 
   const [userInput, setUserInput] = useState("");
   const [timeLeft, setTimeLeft] = useState(0);
-  const [score, setScore] = useState(0); // 🆕 Score state
+  const [score, setScore] = useState(0);
   const [notification, setNotification] = useState({ message: "", type: "" });
 
-  // Fetch words from API Service
   const fetchWords = useCallback(async () => {
     if (!difficulty) return;
     const wordList = await apiService.getWords(difficulty);
@@ -31,33 +30,30 @@ const MirrorTextGame = () => {
       return () => clearInterval(timer);
     } else if (timeLeft === 0 && selectedWord) {
       showNotification("⏳ Time Up! Try Again.", "error");
-      setSelectedWord(null); // Reset selection
+      setSelectedWord(null);
     }
   }, [timeLeft, selectedWord]);
 
-  // Handle word selection
   const handleWordSelection = (word) => {
     setSelectedWord(word);
     setTimeLeft(30);
   };
 
-  // Handle user input
   const handleInputChange = (e) => {
-    setUserInput(e.target.value);
+    setUserInput(e.target.value.toUpperCase()); 
   };
 
-  // Validate user input
   const validateInput = useCallback(async () => {
     if (!selectedWord) return;
 
     const isCorrect = await apiService.validateAttempt(selectedWord.original, userInput);
     if (isCorrect) {
       showNotification("✅ Correct! Well done!", "success");
-      setScore((prevScore) => prevScore + 10); // 🆕 Increase score
-      setSelectedWord(null); // 🆕 Reset to word selection
+      setScore((prevScore) => prevScore + 10);
+      setSelectedWord(null);
     } else {
       showNotification("❌ Incorrect! Try Again.", "error");
-      setScore((prevScore) => (prevScore > 0 ? prevScore - 5 : 0)); // 🆕 Deduct points if wrong
+      setScore((prevScore) => (prevScore > 0 ? prevScore - 5 : 0));
     }
     setUserInput("");
   }, [selectedWord, userInput]);
@@ -78,7 +74,7 @@ const MirrorTextGame = () => {
       )}
 
       <h2>Mirror-Image Text Challenge</h2>
-      <p className="score">🏆 Score: {score}</p> {/* 🆕 Display Score */}
+      <p className="score">🏆 Score: {score}</p>
 
       {!difficulty ? (
         <div className="difficulty-selection">
@@ -112,6 +108,15 @@ const MirrorTextGame = () => {
           />
           <button className="btn btn-success mt-2" onClick={validateInput}>Submit</button>
         </>
+      )}
+
+      {}
+      {difficulty && (
+        <div className="home-button-container">
+          <button className="btn btn-secondary" onClick={() => window.location.href = "/"}>
+            🏠 Home
+          </button>
+        </div>
       )}
     </div>
   );

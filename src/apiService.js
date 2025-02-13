@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:8070";
+const API_BASE_URL = "http://Mirror-Text-backend.ap-south-1.elasticbeanstalk.com"; // Ensure correct protocol
 
 const apiService = {
   getWords: async (difficulty) => {
@@ -8,7 +8,7 @@ const apiService = {
       const response = await axios.get(`${API_BASE_URL}/words/${difficulty}`);
       return response.data;
     } catch (error) {
-      console.error("Error fetching words:", error);
+      console.error("Error fetching words:", error.response ? error.response.data : error.message);
       return [];
     }
   },
@@ -21,7 +21,7 @@ const apiService = {
       });
       return response.data; // Returns true (correct) or false (incorrect)
     } catch (error) {
-      console.error("Validation error:", error);
+      console.error("Validation error:", error.response ? error.response.data : error.message);
       return false;
     }
   },
