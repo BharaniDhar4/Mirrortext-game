@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://Mirror-Text-backend.ap-south-1.elasticbeanstalk.com"; // Ensure correct protocol
+const API_BASE_URL = "https://mirror-text-game.onrender.com/mirror"; 
 
 const apiService = {
   getWords: async (difficulty) => {
@@ -19,7 +19,7 @@ const apiService = {
         originalText,
         userInput,
       });
-      return response.data; // Returns true (correct) or false (incorrect)
+      return response.data; 
     } catch (error) {
       console.error("Validation error:", error.response ? error.response.data : error.message);
       return false;

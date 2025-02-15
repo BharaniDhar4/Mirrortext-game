@@ -109,12 +109,11 @@ input.form-control {
     opacity: 0;
 }
 
-/* Add this to your MirrorTextGame.css */
 
 .home-button-container {
     position: fixed;
     bottom: 0;
-    width: 100%;
+    width: 130%;
     text-align: center;
     padding: 10px 0;
   }

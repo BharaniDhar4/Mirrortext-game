@@ -113,7 +113,7 @@ const MirrorTextGame = () => {
       {}
       {difficulty && (
         <div className="home-button-container">
-          <button className="btn btn-secondary" onClick={() => window.location.href = "/"}>
+          <button className="btn btn-dark" onClick={() => window.location.href = "/"}>
             🏠 Home
           </button>
         </div>
